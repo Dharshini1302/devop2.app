@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14  # or python, java, etc.
+    commands:
+      - echo Installing dependencies...
+      - npm install  # for Node.js apps
+
+  pre_build:
+    commands:
+      - echo Running pre-build steps...
+      - npm run lint  # optional
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build  # or your build command
+
+  post_build:
+    commands:
+      - echo Build completed on `date`
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: dist  # change to your build output directory
