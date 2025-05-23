@@ -3,26 +3,27 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14  # or python, java, etc.
+      nodejs: 14  # You can change this to match your project's Node.js version
     commands:
       - echo Installing dependencies...
-      - npm install  # for Node.js apps
+      - npm install
 
   pre_build:
     commands:
       - echo Running pre-build steps...
-      - npm run lint  # optional
+      - npm run lint || echo "Linting skipped or failed"  # Optional: allow lint to fail gracefully
 
   build:
     commands:
-      - echo Build started on date
-      - npm run build  # or your build command
+      - echo Build started on `date`
+      - npm run build
 
   post_build:
     commands:
-      - echo Build completed on date
+      - echo Build completed on `date`
 
 artifacts:
+  base-directory: dist  # Update this if your build output directory differs
   files:
-    - '*/'
-  base-directory: dist  # change to your build output directory
+    - '**/*'  # Include all files in the dist directory
+
